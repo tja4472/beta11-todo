@@ -16,11 +16,11 @@ import effects from './effects';
 import reducers from './reducers';
 // import { LoginSelector } from './selectors';
 
+import { LoginService } from './services/login.service';
+
 import {
-  AngularFire,
   defaultFirebase,
   FIREBASE_PROVIDERS,
-  FirebaseAuthState
 } from 'angularfire2';
 
 import { MyFirebaseAppConfig } from './my-firebase-app-config';
@@ -39,7 +39,7 @@ class MyApp {
   pages: Array<{ title: string, component: any }>;
 
   constructor(
-    public af: AngularFire,
+    private loginService: LoginService,
     public platform: Platform
   ) {
     this.initializeApp();
@@ -51,21 +51,7 @@ class MyApp {
       { title: 'Home page', component: HomePage }
     ];
 
-    // Subscribe to the auth object to check for the login status
-    // of the user.      
-    af.auth.take(1).subscribe((authState: FirebaseAuthState) => {
-      // Run once.
-      // af.auth.unsubscribe();
-
-      console.log('af.auth.subscribe:authState>', authState);
-      let authenticated: boolean = !!authState;
-
-      console.log('authenticated:', authenticated);
-
-      if (authenticated) {
-        // this.store.dispatch(loginActions.restoreAuthentication(authState));
-      }
-    });
+    loginService.initialise();
   }
 
   initializeApp() {
@@ -84,6 +70,7 @@ class MyApp {
 }
 
 ionicBootstrap(MyApp, [
+  LoginService,
   /**
    * provideStore is run once at application bootstrap, accepting a reducer
    * function or object map of reducer functions. If passed an object of
