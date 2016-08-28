@@ -6,6 +6,15 @@ import { HomePage } from './pages/home/home.page';
 import { Page1 } from './pages/page1/page1';
 import { Page2 } from './pages/page2/page2';
 
+import {
+  AngularFire,
+  defaultFirebase,
+  FIREBASE_PROVIDERS,
+  FirebaseAuthState
+} from 'angularfire2';
+
+import { MyFirebaseAppConfig } from './my-firebase-app-config';
+
 // Add the RxJS Observable operators we need in this app.
 import './rxjs-operators';
 
@@ -17,18 +26,36 @@ class MyApp {
 
   rootPage: any = Page1;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform) {
+  constructor(
+    public af: AngularFire,
+    public platform: Platform
+  ) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Page uno', component: Page1 },
       { title: 'Page dos', component: Page2 },
-      { title: 'Home page', component: HomePage }      
+      { title: 'Home page', component: HomePage }
     ];
 
+    // Subscribe to the auth object to check for the login status
+    // of the user.      
+    af.auth.take(1).subscribe((authState: FirebaseAuthState) => {
+      // Run once.
+      // af.auth.unsubscribe();
+
+      console.log('af.auth.subscribe:authState>', authState);
+      let authenticated: boolean = !!authState;
+
+      console.log('authenticated:', authenticated);
+
+      if (authenticated) {
+        // this.store.dispatch(loginActions.restoreAuthentication(authState));
+      }
+    });
   }
 
   initializeApp() {
@@ -46,4 +73,9 @@ class MyApp {
   }
 }
 
-ionicBootstrap(MyApp);
+ionicBootstrap(MyApp, [
+  FIREBASE_PROVIDERS,
+
+  // Initialize Firebase app  
+  defaultFirebase(MyFirebaseAppConfig.config)
+]);
