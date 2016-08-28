@@ -36,23 +36,33 @@ export class LoginService {
         return this.store.let(LoginSelector.getLoginState());
     }
 
-anonymousAuthentication() {
-    this.store.dispatch(
-      this.loginActions.anonymousAuthentication());
-}
-    
+    anonymousAuthentication() {
+        this.store.dispatch(
+            this.loginActions.anonymousAuthentication());
+    }
+
+    createUser(
+        userName: string,
+        password: string
+    ) {
+        this.store.dispatch(
+            this.loginActions.createUser(
+                userName,
+                password));
+    }
+
     emailAuthentication(
         userName: string,
         password: string
     ) {
-      this.store.dispatch(
-        this.loginActions.emailAuthentication(
-          userName,
-          password));
+        this.store.dispatch(
+            this.loginActions.emailAuthentication(
+                userName,
+                password));
     }
 
     googleAuthentication() {
-     this.store.dispatch(
-      this.loginActions.googleAuthentication());       
+        this.store.dispatch(
+            this.loginActions.googleAuthentication());
     }
 }

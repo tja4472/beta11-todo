@@ -8,7 +8,6 @@
 </ion-header>
 
 <ion-content class="login-page">
-
   <ion-list>
     <form [formGroup]="loginForm" (ngSubmit)="logForm()" novalidate>
       <ion-item>
@@ -17,9 +16,7 @@
         </ion-input>
       </ion-item>
 
-      <p *ngIf="!loginForm.controls.username.valid">This field is invalid!</p>
-      <p *ngIf="loginForm.controls.username.errors">This field is required!</p>
-      <p *ngIf="loginForm.controls.username.hasError('required')">This field is required! AAAA</p>
+      <control-messages [control]="loginForm.controls.username"></control-messages>
 
       <ion-item>
         <ion-label floating primary>Password</ion-label>
@@ -27,10 +24,10 @@
         </ion-input>
       </ion-item>
 
-      <p *ngIf="loginForm.controls.password.hasError('required')">This field is required!</p>      
+      <control-messages [control]="loginForm.controls.password"></control-messages>
 
       <div padding>
-        <button type="submit" primary block>Create</button>
+        <button type="submit" [disabled]="!loginForm.valid" primary block>Create</button>
       </div>
     </form>
   </ion-list>

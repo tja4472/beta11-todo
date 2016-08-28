@@ -1,20 +1,23 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { Error, ErrorInput } from '../../components/error/error.component';
+import { Error } from '../../components/error/error.component';
+
+import { LoginService } from '../../services/login.service';
 
 import { Store } from '@ngrx/store';
 import { LoginActions } from '../../actions';
 import { AppState } from '../../reducers';
 import { LoginSelector } from '../../selectors';
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { ControlMessages } from '../../components/control-messages/control-messages.component';
+// import { ValidationService } from '../../validation.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  directives: [Error],
+  directives: [ControlMessages, Error],
   templateUrl: 'build/pages/signup/signup.page.html'
 })
 export class SignupPage {
-  // signup: { username?: string, password?: string } = {};
   submitted = false;
   public loginForm: FormGroup;
 
@@ -22,6 +25,7 @@ export class SignupPage {
 
   constructor(
     private formBuilder: FormBuilder,
+    private loginService: LoginService,    
     private loginActions: LoginActions,
     private store: Store<AppState>) {
     //
@@ -43,22 +47,10 @@ export class SignupPage {
     this.submitted = true;
 
     if (this.loginForm.valid) {
-      this.store.dispatch(
-        this.loginActions.createUser(
-          this.loginForm.value.username,
-          this.loginForm.value.password));
+      this.loginService.createUser(
+        this.loginForm.value.username,
+        this.loginForm.value.password
+      );
     }
   }
-  /*
-  onSignup(form) {
-    this.submitted = true;
-
-    if (form.valid) {
-      this.store.dispatch(
-        this.loginActions.createUser(
-          this.signup.username,
-          this.signup.password));
-    }
-  }
-*/
 }
