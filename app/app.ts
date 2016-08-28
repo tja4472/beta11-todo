@@ -3,6 +3,7 @@ import { ionicBootstrap, Platform, Nav } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
 import { HomePage } from './pages/home/home.page';
+import { LoginPage } from './pages/login/login.page';
 import { Page1 } from './pages/page1/page1';
 import { Page2 } from './pages/page2/page2';
 
@@ -48,7 +49,8 @@ class MyApp {
     this.pages = [
       { title: 'Page uno', component: Page1 },
       { title: 'Page dos', component: Page2 },
-      { title: 'Home page', component: HomePage }
+      { title: 'Home page', component: HomePage },
+      { title: 'Login page', component: LoginPage }      
     ];
 
     loginService.initialise();
