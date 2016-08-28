@@ -6,6 +6,9 @@ import { HomePage } from './pages/home/home.page';
 import { Page1 } from './pages/page1/page1';
 import { Page2 } from './pages/page2/page2';
 
+// Add the RxJS Observable operators we need in this app.
+import './rxjs-operators';
+
 @Component({
   templateUrl: 'build/app.html'
 })
