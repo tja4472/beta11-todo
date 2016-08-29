@@ -1,7 +1,7 @@
 import * as LoginSelector from './login.selector';
-// import * as CollectionSelector from './collection.selector';
+import * as TodoSelector from './todo.selector';
 
 export {
-// CollectionSelector,
-LoginSelector
+LoginSelector,
+TodoSelector
 };

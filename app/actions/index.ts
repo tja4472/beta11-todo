@@ -1,12 +1,12 @@
 import { LoginActions } from './login.action';
-// import { TextItemActions } from './textItem.action';
+import { ToDoActions } from './todo.action';
 
 export {
 LoginActions,
-// TextItemActions
+ToDoActions
 };
 
 export default [
   LoginActions,
-  // TextItemActions
+  ToDoActions
 ];

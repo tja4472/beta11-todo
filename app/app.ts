@@ -19,6 +19,8 @@ import reducers from './reducers';
 // import { LoginSelector } from './selectors';
 
 import { LoginService } from './services/login.service';
+import { TodoDataService } from './services/todo.data.service';
+import { TodoService } from './services/todo.service';
 
 import {
   defaultFirebase,
@@ -51,8 +53,8 @@ class MyApp {
       { title: 'Page uno', component: Page1 },
       { title: 'Page dos', component: Page2 },
       { title: 'Home page', component: HomePage },
-      { title: 'Login page', component: LoginPage },      
-      { title: 'Signup page', component: SignupPage }      
+      { title: 'Login page', component: LoginPage },
+      { title: 'Signup page', component: SignupPage }
     ];
 
     loginService.initialise();
@@ -75,6 +77,8 @@ class MyApp {
 
 ionicBootstrap(MyApp, [
   LoginService,
+  TodoDataService,
+  TodoService,
   /**
    * provideStore is run once at application bootstrap, accepting a reducer
    * function or object map of reducer functions. If passed an object of

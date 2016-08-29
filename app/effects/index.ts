@@ -1,11 +1,12 @@
 import { LoginEffects } from './login.effect';
-// import { TextItemEffects } from './text-item.effect';
+import { ToDoEffects } from './todo.effect';
 
 export {
 LoginEffects,
-// TextItemEffects
+ToDoEffects
 };
 
 export default [
-  LoginEffects
+  LoginEffects,
+  ToDoEffects
 ];

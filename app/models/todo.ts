@@ -1,5 +1,5 @@
 export interface ToDo {
-    // key: string;
+    $key: string;
     name: string;
     description: string;
 }

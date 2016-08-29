@@ -1,7 +1,7 @@
 // import '@ngrx/core/add/operator/select';
 // import 'rxjs/add/operator/switchMap';
 // import 'rxjs/add/operator/let';
-import { Observable } from 'rxjs/Observable';
+// import { Observable } from 'rxjs/Observable';
 
 /**
  * The compose function is one of our most handy tools. In basic terms, you give
@@ -50,6 +50,7 @@ import { combineReducers } from '@ngrx/store';
 // import booksReducer, * as fromBooks from './books';
 // import collectionReducer, * as fromCollection from './collection';
 import loginReducer, * as fromLogin from './login.reducer';
+import todoReducer, * as fromTodo from './todo.reducer';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -60,10 +61,12 @@ export interface AppState {
   // books: fromBooks.BooksState;
   // collection: fromCollection.CollectionState;
   login: fromLogin.LoginState;
+  todo: fromTodo.TodoState;
 }
 
 // export * from './collection';
 export * from './login.reducer';
+export * from './todo.reducer';
 
 /**
  * Because metareducers take a reducer function and return a new reducer,
@@ -76,7 +79,8 @@ export default compose(storeFreeze, storeLogger(), combineReducers)({
   // search: searchReducer,
   // books: booksReducer,
   // collection: collectionReducer,
-  login: loginReducer
+  login: loginReducer,
+  todo: todoReducer
 });
 
 
