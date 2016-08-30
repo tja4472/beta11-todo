@@ -14,7 +14,7 @@ export class TodoDataService {
     getData(): Observable<ToDo[]> {
         return this.af.database.list('/todo', {
             query: {
-                orderByKey: true,
+                orderByChild: 'index',
                 limitToFirst: 8, /* include today which we ignore in HTML */
             }
         });

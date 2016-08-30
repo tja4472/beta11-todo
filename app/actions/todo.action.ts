@@ -18,4 +18,18 @@ export class ToDoActions {
       payload: items
     };
   }
+
+  static REORDER_LIST = '[ToDoActions] Reorder List';
+  reorderList(
+    fromIndex: number,
+    toIndex: number
+  ): Action {
+    return {
+      type: ToDoActions.REORDER_LIST,
+      payload: {
+        fromIndex: fromIndex,
+        toIndex: toIndex
+      }
+    };
+  }
 }

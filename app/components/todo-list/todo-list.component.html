@@ -1,11 +1,10 @@
 <h3>todo-list</h3>
-
-  <button fab primary fab-bottom fab-right (click)="addClick()">
+  <button fab primary fab-bottom fab-right (click)="addClick.emit()">
     <ion-icon name="add"></ion-icon>
   </button>
 
-<ion-list reorder="true" (ionItemReorder)="reorderItems($event)">
-    <ion-item *ngFor="let item of todos" (click)="itemSelected(item)">
+<ion-list reorder="true" (ionItemReorder)="reorderItems.emit($event)">
+    <ion-item *ngFor="let item of todos" (click)="itemSelected.emit(item)">
         {{item.name}}
     </ion-item>
 </ion-list>
