@@ -17,11 +17,10 @@ export class TodoDataService {
     getData(): Observable<ToDo[]> {
         return this.af.database.list('/todo', {
             query: {
-                orderByChild: 'index',
-                limitToFirst: 8, /* include today which we ignore in HTML */
+                orderByChild: 'index'
             }
-        });
-        // .map(x => x.map(d => toFivebookItem(d)));
+        })
+        .map(x => x.map(d => fromFirebaseTodo(d)));
     }
 
     reorderItemsAndUpdate(indexes: Indexes, todos: ToDo[]) {
@@ -41,50 +40,38 @@ export class TodoDataService {
 
         if (todo.$key === '') {
             // insert.
-            console.log('save:insert');
-            items.push(
-                {
-                    description: todo.description,
-                    index: todo.index,
-                    name: todo.name
-                });            
+            items.push(toFirebaseTodo(todo));
         } else {
             // update.
-            console.log('save:update');
-            items.update(todo.$key,
-                {
-                    description: todo.description,
-                    index: todo.index,
-                    name: todo.name
-                });
+            items.update(todo.$key, toFirebaseTodo(todo));
         }
     }
 }
 
-/*
-function toFivebookItem(x: any): FivebookItem {
-    console.log('xxxx>', x);
-    let result: FivebookItem = <FivebookItem>{
-        books: [],
-        date: x.date,
-        description: x.descr,
-        title: x.title
-    };
-
-    result.books = x.books.map(book => toFivebookItemBook(book));
-
-    return result;
+interface FirebaseTodo {
+    description: string;
+    index: number;
+    name: string;
 }
 
-function toFivebookItemBook(x: any): FivebookItemBook {
-    let result = <FivebookItemBook>{
-        authorString: x.authorstring,
-        description: x.descr,
-        imageUrl: x.image_url,
-        subTitle: x.subtitle,
-        title: x.title
+function toFirebaseTodo(todo: ToDo): FirebaseTodo {
+    //
+    let result: FirebaseTodo = {
+        description: todo.description,
+        index: todo.index,
+        name: todo.name
     };
 
     return result;
 }
-*/
+
+function fromFirebaseTodo(x: any): ToDo {
+    let result: ToDo = {
+        $key: x.$key,
+        description: x.description,
+        index: x.index,
+        name: x.name
+    };
+
+    return result;
+}

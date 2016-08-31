@@ -17,7 +17,7 @@ export class TodoPage {
   private todo: ToDo =
   {
     $key: '',
-    description: '',
+    // description: '',
     name: '',
     index: 0
   };
@@ -43,7 +43,7 @@ export class TodoPage {
     //
     this.todoForm = this.formBuilder.group({
       name: [this.todo.name, Validators.required],
-      description: [this.todo.description, Validators.required],
+      description: [this.todo.description],
     });
   }
 
