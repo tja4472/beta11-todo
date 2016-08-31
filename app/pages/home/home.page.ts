@@ -34,6 +34,7 @@ export class HomePage {
     console.log('reorderItems:indexes>', indexes);
     console.log('reorderItems:indexes.from>', indexes.from);
     console.log('reorderItems:indexes.to>', indexes.to);    
+    this.todoService.reorderItems(indexes);
     // http://ionicframework.com/docs/v2/api/components/item/ItemReorder/
     // this.items = reorderArray(this.items, indexes);
   }  

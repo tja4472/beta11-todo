@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { AngularFire } from 'angularfire2';
+import { Indexes } from '../models/indexes';
 import { ToDo } from '../models/todo';
+
+import { reorderArray } from 'ionic-angular';
 
 @Injectable()
 export class TodoDataService {
@@ -18,7 +21,18 @@ export class TodoDataService {
                 limitToFirst: 8, /* include today which we ignore in HTML */
             }
         });
-            // .map(x => x.map(d => toFivebookItem(d)));
+        // .map(x => x.map(d => toFivebookItem(d)));
+    }
+
+    reorderItemsAndUpdate(indexes: Indexes, todos: ToDo[]) {
+        const itemsToSave = [...todos];
+        reorderArray(itemsToSave, indexes);
+
+        const items = this.af.database.list('/todo');
+
+        for (let x = 0; x < itemsToSave.length; x++) {
+            items.update(itemsToSave[x].$key, { index: x });
+        }
     }
 }
 

@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { Store } from '@ngrx/store';
+
+import { Indexes } from '../models/indexes';
 import { ToDo } from '../models/todo';
+
 import { AppState } from '../reducers';
 import { ToDoActions } from '../actions';
 import { TodoSelector} from '../selectors';
@@ -30,5 +33,10 @@ export class TodoService {
 
     isLoading(): Observable<boolean> {
         return this.store.let(TodoSelector.getLoading());
+    }
+
+    reorderItems(indexes: Indexes) {
+        this.store.dispatch(
+            this.todoActions.reorderList(indexes));
     }
 }

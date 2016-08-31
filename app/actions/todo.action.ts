@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
+
+import { Indexes } from '../models/indexes'
 import { ToDo } from '../models/todo';
 
 @Injectable()
@@ -20,15 +22,11 @@ export class ToDoActions {
   }
 
   static REORDER_LIST = '[ToDoActions] Reorder List';
-  reorderList(
-    fromIndex: number,
-    toIndex: number
-  ): Action {
+  reorderList(indexes: Indexes): Action {
     return {
       type: ToDoActions.REORDER_LIST,
       payload: {
-        fromIndex: fromIndex,
-        toIndex: toIndex
+        indexes: indexes
       }
     };
   }

@@ -11,7 +11,7 @@ export class ToDoEffects {
     private updates$: StateUpdates<AppState>,
     private todoActions: ToDoActions,
     private todoDataService: TodoDataService
-  ) {}
+  ) { }
 
   @Effect() loadCollection$ = this.updates$
     .whenAction(ToDoActions.LOAD)
@@ -23,4 +23,16 @@ export class ToDoEffects {
     .map((items: ToDo[]) => this.todoActions.loadSuccess(items));
   // Terminate effect.
   // .ignoreElements());  
+
+  @Effect() reorderList$ = this.updates$
+    .whenAction(ToDoActions.REORDER_LIST)
+    .do(x => {
+      console.log('Effect:reorderList$:A', x);
+      this.todoDataService.reorderItemsAndUpdate(
+        x.action.payload.indexes,
+        x.state.todo.todos);
+    })
+
+  // Terminate effect.
+  .ignoreElements();      
 }
