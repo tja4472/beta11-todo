@@ -5,8 +5,10 @@
 <ion-list reorder="true" (ionItemReorder)="reorderItems.emit($event)">
   <ion-item-sliding *ngFor="let item of todos">
     <button ion-item (click)="editItem.emit(item)">
-      <h3>{{item.name}} - {{item.isComplete}}</h3>    
-      <p>{{item.description}}</p>      
+      <span [style.text-decoration]="item.isComplete ? 'line-through': ''">
+        <h3>{{item.name}} - {{item.isComplete}}</h3> 
+        <p>{{item.description}}</p>
+      </span>
     </button>
 
     <ion-item-options>
