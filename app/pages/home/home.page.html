@@ -9,13 +9,10 @@
 
 
 <ion-content padding class="page1">
-
-  <h3>Home page</h3>
   <todo-list 
       [todos]="todos$ | async" 
       (addClick)="addClick($event)"
       (itemSelected)="itemSelected($event)"
       (reorderItems)="reorderItems($event)"
   ></todo-list>
-
 </ion-content>

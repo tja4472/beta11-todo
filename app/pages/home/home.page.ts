@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { TodoService } from '../../services/todo.service';
 import { ItemSelectedOutput, ReorderItemsOutput, TodosInput, TodoListComponent } from '../../components/todo-list/todo-list.component';
-// import { ToDo } from '../../models/todo';
+import { ToDo } from '../../models/todo';
+import { TodoPage } from '../todo/todo.page';
+import { assign } from '../../utils';
 
 @Component({
   directives: [TodoListComponent],
@@ -14,6 +16,7 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
+    public modalCtrl: ModalController,
     private todoService: TodoService) {
     this.todos$ = todoService.getData();
   }
@@ -24,10 +27,28 @@ export class HomePage {
 
   addClick() {
     console.log('addClick');
+    let modal = this.modalCtrl.create(TodoPage);
+
+    modal.onDidDismiss((data: ToDo) => {
+      console.log('onDidDismiss>', data);
+    });
+
+    modal.present();
   }  
 
   itemSelected(item: ItemSelectedOutput) {
     console.log('itemSelected:item>', item);
+    // let todo: ToDo;
+    // todo = assign(todo, item);
+
+
+    let modal = this.modalCtrl.create(TodoPage, { todo: item });
+
+    modal.onDidDismiss((data: ToDo) => {
+      console.log('onDidDismiss>', data);
+    });
+
+    modal.present();    
   }
 
   reorderItems(indexes: ReorderItemsOutput) {
