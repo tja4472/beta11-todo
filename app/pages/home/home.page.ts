@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { TodoService } from '../../services/todo.service';
-import { ItemSelectedOutput, ReorderItemsOutput, TodosInput, TodoListComponent } from '../../components/todo-list/todo-list.component';
+import { EditItemOutput, CompleteItemOutput, ReorderItemsOutput, TodosInput, TodoListComponent } from '../../components/todo-list/todo-list.component';
 import { ToDo } from '../../models/todo';
 import { TodoPage } from '../todo/todo.page';
-import { assign } from '../../utils';
+// import { assign } from '../../utils';
 
 @Component({
   directives: [TodoListComponent],
@@ -25,23 +25,29 @@ export class HomePage {
     this.todoService.initialise();
   }
 
-  addClick() {
-    console.log('addClick');
+  addItem() {
+    console.log('addItem');
     let modal = this.modalCtrl.create(TodoPage);
 
     modal.onDidDismiss((data: ToDo) => {
       console.log('onDidDismiss>', data);
 
       if (!!data) {
-       this.todoService.save(data);
+        this.todoService.save(data);
       }
     });
 
     modal.present();
-  }  
+  }
 
-  itemSelected(item: ItemSelectedOutput) {
-    console.log('itemSelected:item>', item);
+  completeItem(item: CompleteItemOutput) {
+    console.log('completeItem:item>', item);
+    item.isComplete = true;
+    this.todoService.save(item);
+  }
+
+  editItem(item: EditItemOutput) {
+    console.log('editItem:item>', item);
     // let todo: ToDo;
     // todo = assign(todo, item);
 
@@ -52,19 +58,19 @@ export class HomePage {
       console.log('onDidDismiss>', data);
 
       if (!!data) {
-       this.todoService.save(data);
+        this.todoService.save(data);
       }
     });
 
-    modal.present();    
+    modal.present();
   }
 
   reorderItems(indexes: ReorderItemsOutput) {
     console.log('reorderItems:indexes>', indexes);
     console.log('reorderItems:indexes.from>', indexes.from);
-    console.log('reorderItems:indexes.to>', indexes.to);    
+    console.log('reorderItems:indexes.to>', indexes.to);
     this.todoService.reorderItems(indexes);
     // http://ionicframework.com/docs/v2/api/components/item/ItemReorder/
     // this.items = reorderArray(this.items, indexes);
-  }  
+  }
 }

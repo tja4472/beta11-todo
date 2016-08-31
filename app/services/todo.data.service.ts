@@ -20,7 +20,7 @@ export class TodoDataService {
                 orderByChild: 'index'
             }
         })
-        .map(x => x.map(d => fromFirebaseTodo(d)));
+            .map(x => x.map(d => fromFirebaseTodo(d)));
     }
 
     reorderItemsAndUpdate(indexes: Indexes, todos: ToDo[]) {
@@ -49,9 +49,10 @@ export class TodoDataService {
 }
 
 interface FirebaseTodo {
-    description: string;
+    description?: string;
     index: number;
     name: string;
+    isComplete: boolean;
 }
 
 function toFirebaseTodo(todo: ToDo): FirebaseTodo {
@@ -59,9 +60,11 @@ function toFirebaseTodo(todo: ToDo): FirebaseTodo {
     let result: FirebaseTodo = {
         description: todo.description,
         index: todo.index,
-        name: todo.name
+        name: todo.name,
+        isComplete: todo.isComplete
     };
 
+    console.log('toFirebaseTodo>', result);
     return result;
 }
 
@@ -70,8 +73,17 @@ function fromFirebaseTodo(x: any): ToDo {
         $key: x.$key,
         description: x.description,
         index: x.index,
+        isComplete: x.isComplete,
         name: x.name
     };
+
+    if (result.description === undefined) {
+        result.description = null;
+    }
+
+    if (result.isComplete === undefined) {
+        result.isComplete = false;
+    }
 
     return result;
 }

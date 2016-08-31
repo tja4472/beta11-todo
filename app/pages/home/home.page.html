@@ -11,8 +11,9 @@
 <ion-content padding class="page1">
   <todo-list 
       [todos]="todos$ | async" 
-      (addClick)="addClick($event)"
-      (itemSelected)="itemSelected($event)"
+      (addItem)="addItem($event)"
+      (completeItem)="completeItem($event)"      
+      (editItem)="editItem($event)"
       (reorderItems)="reorderItems($event)"
   ></todo-list>
 </ion-content>

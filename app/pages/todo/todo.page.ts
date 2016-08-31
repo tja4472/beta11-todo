@@ -19,7 +19,8 @@ export class TodoPage {
     $key: '',
     // description: '',
     name: '',
-    index: 0
+    index: 0,
+    isComplete: false
   };
 
   private isEditing: boolean;
