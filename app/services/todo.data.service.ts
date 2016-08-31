@@ -34,6 +34,31 @@ export class TodoDataService {
             items.update(itemsToSave[x].$key, { index: x });
         }
     }
+
+    save(todo: ToDo) {
+        console.log('save>', todo);
+        const items = this.af.database.list('/todo');
+
+        if (todo.$key === '') {
+            // insert.
+            console.log('save:insert');
+            items.push(
+                {
+                    description: todo.description,
+                    index: todo.index,
+                    name: todo.name
+                });            
+        } else {
+            // update.
+            console.log('save:update');
+            items.update(todo.$key,
+                {
+                    description: todo.description,
+                    index: todo.index,
+                    name: todo.name
+                });
+        }
+    }
 }
 
 /*

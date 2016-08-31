@@ -39,4 +39,9 @@ export class TodoService {
         this.store.dispatch(
             this.todoActions.reorderList(indexes));
     }
+
+    save(todo: ToDo) {
+        this.store.dispatch(
+            this.todoActions.save(todo));
+    }
 }

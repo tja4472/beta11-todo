@@ -35,4 +35,15 @@ export class ToDoEffects {
 
   // Terminate effect.
   .ignoreElements();      
+
+  @Effect() save$ = this.updates$
+    .whenAction(ToDoActions.SAVE)
+    .do(x => {
+      console.log('Effect:save$:A', x);
+      this.todoDataService.save(
+        x.action.payload);
+    })
+
+  // Terminate effect.
+  .ignoreElements();   
 }

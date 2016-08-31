@@ -30,4 +30,12 @@ export class ToDoActions {
       }
     };
   }
+
+  static SAVE = '[ToDoActions] Save';
+  save(item: ToDo): Action {
+    return {
+      type: ToDoActions.SAVE,
+      payload: item
+    };
+  }
 }

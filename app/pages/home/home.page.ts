@@ -31,6 +31,10 @@ export class HomePage {
 
     modal.onDidDismiss((data: ToDo) => {
       console.log('onDidDismiss>', data);
+
+      if (!!data) {
+       this.todoService.save(data);
+      }
     });
 
     modal.present();
@@ -46,6 +50,10 @@ export class HomePage {
 
     modal.onDidDismiss((data: ToDo) => {
       console.log('onDidDismiss>', data);
+
+      if (!!data) {
+       this.todoService.save(data);
+      }
     });
 
     modal.present();    
