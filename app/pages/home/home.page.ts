@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { ActionSheetController, NavController, ModalController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { TodoService } from '../../services/todo.service';
 import { EditItemOutput, ToggleCompleteItemOutput, ReorderItemsOutput, TodosInput, TodoListComponent } from '../../components/todo-list/todo-list.component';
@@ -17,6 +17,7 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     public modalCtrl: ModalController,
+    public actionSheetCtrl: ActionSheetController,
     private todoService: TodoService) {
     this.todos$ = todoService.getData();
   }
@@ -44,6 +45,10 @@ export class HomePage {
     console.log('completeItem:item>', item);
     item.isComplete = !item.isComplete;
     this.todoService.save(item);
+
+    if (item.isComplete) {
+      this.presentActionSheet();
+    }
   }
 
   editItem(item: EditItemOutput) {
@@ -63,6 +68,27 @@ export class HomePage {
     });
 
     modal.present();
+  }
+
+  presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      // title: 'Modify your album',
+      buttons: [
+        {
+          text: 'Clear completed?',
+          handler: () => {
+            console.log('Clear completed clicked');
+          }
+        }, {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 
   reorderItems(indexes: ReorderItemsOutput) {
