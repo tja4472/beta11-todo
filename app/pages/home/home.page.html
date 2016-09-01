@@ -12,7 +12,7 @@
   <todo-list 
       [todos]="todos$ | async" 
       (addItem)="addItem($event)"
-      (completeItem)="completeItem($event)"      
+      (toggleCompleteItem)="toggleCompleteItem($event)"      
       (editItem)="editItem($event)"
       (reorderItems)="reorderItems($event)"
   ></todo-list>

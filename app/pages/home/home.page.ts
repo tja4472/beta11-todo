@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { TodoService } from '../../services/todo.service';
-import { EditItemOutput, CompleteItemOutput, ReorderItemsOutput, TodosInput, TodoListComponent } from '../../components/todo-list/todo-list.component';
+import { EditItemOutput, ToggleCompleteItemOutput, ReorderItemsOutput, TodosInput, TodoListComponent } from '../../components/todo-list/todo-list.component';
 import { ToDo } from '../../models/todo';
 import { TodoPage } from '../todo/todo.page';
 // import { assign } from '../../utils';
@@ -40,9 +40,9 @@ export class HomePage {
     modal.present();
   }
 
-  completeItem(item: CompleteItemOutput) {
+  toggleCompleteItem(item: ToggleCompleteItemOutput) {
     console.log('completeItem:item>', item);
-    item.isComplete = true;
+    item.isComplete = !item.isComplete;
     this.todoService.save(item);
   }
 

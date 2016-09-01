@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { ToDo } from '../../models/todo';
 
 
-export type CompleteItemOutput = ToDo;
+export type ToggleCompleteItemOutput = ToDo;
 export type EditItemOutput = ToDo;
 export type ReorderItemsOutput = {
   from: number,
@@ -18,7 +18,7 @@ export type TodosInput = ToDo[];
 export class TodoListComponent {
   @Input() public todos: TodosInput;
   @Output() public addItem = new EventEmitter();
-  @Output() public completeItem = new EventEmitter<CompleteItemOutput>();  
+  @Output() public toggleCompleteItem = new EventEmitter<ToggleCompleteItemOutput>();  
   @Output() public editItem = new EventEmitter<EditItemOutput>();
   @Output() public reorderItems = new EventEmitter<ReorderItemsOutput>();
 

@@ -17,7 +17,7 @@ export class TodoPage {
   private todo: ToDo =
   {
     $key: '',
-    // description: '',
+    description: null,
     name: '',
     index: 0,
     isComplete: false
@@ -45,6 +45,7 @@ export class TodoPage {
     this.todoForm = this.formBuilder.group({
       name: [this.todo.name, Validators.required],
       description: [this.todo.description],
+      isComplete: [this.todo.isComplete]
     });
   }
 
@@ -61,11 +62,10 @@ export class TodoPage {
     }
 
     console.log(this.todoForm.value);
-    // console.log('todoForm>', this.todoForm);
 
     this.todo.name = this.todoForm.value.name;
     this.todo.description = this.todoForm.value.description;
-
+    this.todo.isComplete = this.todoForm.value.isComplete;
     this.viewController.dismiss(this.todo);
   }
 }
