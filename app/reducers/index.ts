@@ -51,22 +51,25 @@ import { combineReducers } from '@ngrx/store';
 // import collectionReducer, * as fromCollection from './collection';
 import loginReducer, * as fromLogin from './login.reducer';
 import todoReducer, * as fromTodo from './todo.reducer';
+import todoCompletedReducer, * as fromTodoCompleted from './todo-completed.reducer';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
  * our top level state interface is just a map of keys to inner state types.
  */
 export interface AppState {
-  // search: fromSearch.SearchState;
-  // books: fromBooks.BooksState;
-  // collection: fromCollection.CollectionState;
+  // These property names have to match those in the compose.
   login: fromLogin.LoginState;
   todo: fromTodo.TodoState;
+  todoCompleted: fromTodoCompleted.TodoCompletedState;
 }
 
 // export * from './collection';
 export * from './login.reducer';
 export * from './todo.reducer';
+export { 
+  fromTodoCompleted
+};
 
 /**
  * Because metareducers take a reducer function and return a new reducer,
@@ -76,13 +79,11 @@ export * from './todo.reducer';
  * the result from right to left.
  */
 export default compose(storeFreeze, storeLogger(), combineReducers)({
-  // search: searchReducer,
-  // books: booksReducer,
-  // collection: collectionReducer,
+  // These property names have to match those in the AppState interface.
   login: loginReducer,
-  todo: todoReducer
+  todo: todoReducer,
+  todoCompleted: todoCompletedReducer
 });
-
 
 /**
  * A selector function is a map function factory. We pass it parameters and it

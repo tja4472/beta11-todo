@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>View Completed</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="page1">
+  <h3>view completed</h3>
+ 
+  <todo-completed-list
+    [data]="data$ | async" 
+  ></todo-completed-list>
+
+<!--
+{{data$ | async | json }}    
+  <todo-list 
+      [todos]="todos$ | async" 
+      (addItem)="addItem($event)"
+      (toggleCompleteItem)="toggleCompleteItem($event)"      
+      (editItem)="editItem($event)"
+      (reorderItems)="reorderItems($event)"
+  ></todo-list>
+-->
+</ion-content>

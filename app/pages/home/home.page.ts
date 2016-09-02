@@ -19,11 +19,12 @@ export class HomePage {
     public modalCtrl: ModalController,
     public actionSheetCtrl: ActionSheetController,
     private todoService: TodoService) {
+    //
     this.todos$ = todoService.getData();
   }
 
   ionViewLoaded() {
-    this.todoService.initialise();
+    // this.todoService.initialise();
   }
 
   addItem() {

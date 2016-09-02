@@ -7,6 +7,8 @@ import { ToDo } from '../models/todo';
 
 import { reorderArray } from 'ionic-angular';
 
+const FIREBASE_KEY = '/todo';
+
 @Injectable()
 export class TodoDataService {
     constructor(
@@ -15,7 +17,7 @@ export class TodoDataService {
     }
 
     getData(): Observable<ToDo[]> {
-        return this.af.database.list('/todo', {
+        return this.af.database.list(FIREBASE_KEY, {
             query: {
                 orderByChild: 'index'
             }
@@ -27,7 +29,7 @@ export class TodoDataService {
         const itemsToSave = [...todos];
         reorderArray(itemsToSave, indexes);
 
-        const items = this.af.database.list('/todo');
+        const items = this.af.database.list(FIREBASE_KEY);
 
         for (let x = 0; x < itemsToSave.length; x++) {
             items.update(itemsToSave[x].$key, { index: x });
@@ -36,7 +38,7 @@ export class TodoDataService {
 
     save(todo: ToDo) {
         console.log('save>', todo);
-        const items = this.af.database.list('/todo');
+        const items = this.af.database.list(FIREBASE_KEY);
 
         if (todo.$key === '') {
             // insert.

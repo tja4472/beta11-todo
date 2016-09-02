@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 
-import { Indexes } from '../models/indexes'
+import { Indexes } from '../models/indexes';
 import { ToDo } from '../models/todo';
 
 @Injectable()
