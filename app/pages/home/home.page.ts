@@ -24,7 +24,7 @@ export class HomePage {
   }
 
   ionViewLoaded() {
-    // this.todoService.initialise();
+    this.todoService.initialise();
   }
 
   addItem() {
