@@ -18,6 +18,12 @@ export class TodoService {
     ) {
     }
 
+    clearCompletedItems() {
+        this.store.dispatch(
+            this.todoActions.clearCompleted()
+        );
+    }
+
     getData(): Observable<ToDo[]> {
         return this.store.let(TodoSelector.getToDos());
     }

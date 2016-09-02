@@ -19,6 +19,7 @@ import effects from './effects';
 import reducers from './reducers';
 // import { LoginSelector } from './selectors';
 
+import { Fb1DataService } from './services/fb1.data.service';
 import { LoginService } from './services/login.service';
 import { TodoCompletedDataService } from './services/todo-completed.data.service';
 import { TodoCompletedService } from './services/todo-completed.service';
@@ -80,6 +81,7 @@ class MyApp {
 }
 
 ionicBootstrap(MyApp, [
+  Fb1DataService,
   LoginService,
   TodoCompletedDataService,
   TodoCompletedService,

@@ -6,6 +6,13 @@ import { ToDo } from '../models/todo';
 
 @Injectable()
 export class ToDoActions {
+  static CLEAR_COMPLETED = '[ToDoActions] Clear Completed';
+  clearCompleted(): Action {
+    return {
+      type: ToDoActions.CLEAR_COMPLETED
+    };
+  }
+
   static LOAD = '[ToDoActions] Load';
   load(): Action {
     return {

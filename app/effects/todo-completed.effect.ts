@@ -9,8 +9,8 @@ import { TodoCompleted } from '../models/todo-completed';
 export class TodoCompletedEffects {
   constructor(
     private updates$: StateUpdates<AppState>,
-    private todoActions: TodoCompletedActions,
-    private todoDataService: TodoCompletedDataService
+    private actions: TodoCompletedActions,
+    private dataService: TodoCompletedDataService
   ) { }
 
   @Effect() loadCollection$ = this.updates$
@@ -18,9 +18,9 @@ export class TodoCompletedEffects {
     .do(x => { console.log('Effect:loadCollection$:A', x); })
 
     // Watch database node and get items.
-    .switchMap(x => this.todoDataService.getData())
+    .switchMap(x => this.dataService.getData())
     .do(x => { console.log('Effect:loadCollection$:B', x); })
-    .map((items: TodoCompleted[]) => this.todoActions.loadSuccess(items));
+    .map((items: TodoCompleted[]) => this.actions.loadSuccess(items));
   // Terminate effect.
   // .ignoreElements());      
 
@@ -28,7 +28,7 @@ export class TodoCompletedEffects {
     .whenAction(TodoCompletedActions.SAVE)
     .do(x => {
       console.log('Effect:save$:A', x);
-      this.todoDataService.save(
+      this.dataService.save(
         x.action.payload);
     })
 

@@ -85,6 +85,7 @@ export class HomePage {
           text: 'Clear completed?',
           handler: () => {
             console.log('Clear completed clicked');
+            this.todoService.clearCompletedItems();
           }
         }, {
           text: 'Cancel',
