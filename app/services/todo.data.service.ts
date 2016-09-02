@@ -36,6 +36,11 @@ export class TodoDataService {
         }
     }
 
+    removeItem(itemKey: string) {
+        const items = this.af.database.list(FIREBASE_KEY);
+        items.remove(itemKey);
+    }
+
     save(todo: ToDo) {
         console.log('save>', todo);
         const items = this.af.database.list(FIREBASE_KEY);

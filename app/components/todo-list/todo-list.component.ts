@@ -8,6 +8,7 @@ export type ReorderItemsOutput = {
   from: number,
   to: number
 };
+export type RemoveItemOutput = ToDo;
 export type TodosInput = ToDo[];
 
 @Component({
@@ -21,19 +22,8 @@ export class TodoListComponent {
   @Output() public toggleCompleteItem = new EventEmitter<ToggleCompleteItemOutput>();  
   @Output() public editItem = new EventEmitter<EditItemOutput>();
   @Output() public reorderItems = new EventEmitter<ReorderItemsOutput>();
+  @Output() public removeItem = new EventEmitter<RemoveItemOutput>();  
 
   constructor() {
-  }
-
-removeItem(item) {
-   console.log('removeItem>', item);
-}
-
-  aaaaa() {
-    console.log('aaaaa');
-  }
-
-  bb() {
-    console.log('bb');
-  }  
+  } 
 }

@@ -2,7 +2,13 @@ import { Component } from '@angular/core';
 import { ActionSheetController, NavController, ModalController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { TodoService } from '../../services/todo.service';
-import { EditItemOutput, ToggleCompleteItemOutput, ReorderItemsOutput, TodosInput, TodoListComponent } from '../../components/todo-list/todo-list.component';
+import { 
+  EditItemOutput,
+  RemoveItemOutput, 
+  ToggleCompleteItemOutput, 
+  ReorderItemsOutput, 
+  TodosInput, 
+  TodoListComponent } from '../../components/todo-list/todo-list.component';
 import { ToDo } from '../../models/todo';
 import { TodoPage } from '../todo/todo.page';
 // import { assign } from '../../utils';
@@ -100,4 +106,9 @@ export class HomePage {
     // http://ionicframework.com/docs/v2/api/components/item/ItemReorder/
     // this.items = reorderArray(this.items, indexes);
   }
+
+  removeItem(item: RemoveItemOutput) {
+    console.log('removeItem:item>', item);
+    this.todoService.remove(item);
+  }  
 }

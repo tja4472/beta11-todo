@@ -40,6 +40,11 @@ export class TodoService {
             this.todoActions.reorderList(indexes));
     }
 
+    remove(todo: ToDo) {
+        this.store.dispatch(
+            this.todoActions.remove(todo.$key));
+    }
+
     save(todo: ToDo) {
         this.store.dispatch(
             this.todoActions.save(todo));

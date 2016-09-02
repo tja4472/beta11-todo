@@ -36,6 +36,17 @@ export class ToDoEffects {
   // Terminate effect.
   .ignoreElements();      
 
+  @Effect() removeItem$ = this.updates$
+    .whenAction(ToDoActions.REMOVE)
+    .do(x => {
+      console.log('Effect:removeItem$:A', x);
+      this.todoDataService.removeItem(
+        x.action.payload);
+    })
+
+  // Terminate effect.
+  .ignoreElements();  
+
   @Effect() save$ = this.updates$
     .whenAction(ToDoActions.SAVE)
     .do(x => {

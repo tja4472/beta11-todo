@@ -31,6 +31,14 @@ export class ToDoActions {
     };
   }
 
+  static REMOVE = '[ToDoActions] Remove';
+  remove(itemKey: string): Action {
+    return {
+      type: ToDoActions.REMOVE,
+      payload: itemKey
+    };
+  }
+
   static SAVE = '[ToDoActions] Save';
   save(item: ToDo): Action {
     return {
