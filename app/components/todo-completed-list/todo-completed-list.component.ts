@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { TodoCompleted } from '../../models/todo-completed';
 
 /*
@@ -39,5 +39,5 @@ removeItem(item) {
   bb() {
     console.log('bb');
   }
-*/    
+*/
 }

@@ -33,5 +33,5 @@ export class TodoCompletedEffects {
     })
 
   // Terminate effect.
-  .ignoreElements();   
+  .ignoreElements();
 }

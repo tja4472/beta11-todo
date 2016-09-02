@@ -26,5 +26,5 @@ export class ViewCompletedPage {
 
   ionViewLoaded() {
     this.todoCompletedService.initialise();
-  }  
+  }
 }

@@ -92,7 +92,7 @@ export class LoginActions {
     static GOOGLE_AUTHENTICATION  = '[Login] Google Authentication';
     googleAuthentication(): Action {
         return {
-            type: LoginActions.GOOGLE_AUTHENTICATION 
+            type: LoginActions.GOOGLE_AUTHENTICATION
         };
     }
 
@@ -100,7 +100,7 @@ export class LoginActions {
     googleAuthenticationSuccess(user: FirebaseAuthState): Action {
         return {
             type: LoginActions.GOOGLE_AUTHENTICATION_SUCCESS,
-            payload: user            
+            payload: user
         };
     }
 
@@ -127,4 +127,4 @@ export class LoginActions {
             payload: user
         };
     }
-} 
+}

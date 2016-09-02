@@ -67,7 +67,7 @@ export interface AppState {
 // export * from './collection';
 export * from './login.reducer';
 export * from './todo.reducer';
-export { 
+export {
   fromTodoCompleted
 };
 

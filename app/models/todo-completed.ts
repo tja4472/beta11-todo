@@ -1,5 +1,5 @@
 export interface TodoCompleted {
     $key: string;
-    description?: string;    
+    description?: string;
     name: string;
 }

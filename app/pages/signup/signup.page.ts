@@ -25,7 +25,7 @@ export class SignupPage {
 
   constructor(
     private formBuilder: FormBuilder,
-    private loginService: LoginService,    
+    private loginService: LoginService,
     private loginActions: LoginActions,
     private store: Store<AppState>) {
     //

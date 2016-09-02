@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { ActionSheetController, NavController, ModalController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { TodoService } from '../../services/todo.service';
-import { 
+import {
   EditItemOutput,
-  RemoveItemOutput, 
-  ToggleCompleteItemOutput, 
-  ReorderItemsOutput, 
-  TodosInput, 
+  RemoveItemOutput,
+  ToggleCompleteItemOutput,
+  ReorderItemsOutput,
+  TodosInput,
   TodoListComponent } from '../../components/todo-list/todo-list.component';
 import { ToDo } from '../../models/todo';
 import { TodoPage } from '../todo/todo.page';
@@ -111,5 +111,5 @@ export class HomePage {
   removeItem(item: RemoveItemOutput) {
     console.log('removeItem:item>', item);
     this.todoService.remove(item);
-  }  
+  }
 }

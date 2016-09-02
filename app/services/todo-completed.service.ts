@@ -18,12 +18,12 @@ export class TodoCompletedService {
     }
 
     getData(): Observable<TodoCompleted[]> {
-/*  
-        this.store.select(s => s.todoCompleted)
-        .subscribe(x => console.log('sssss>', x));      
-        let a = this.store.select(s => s.todoCompleted.todoCompletedList);
-        return a;
-*/        
+        /*  
+                this.store.select(s => s.todoCompleted)
+                .subscribe(x => console.log('sssss>', x));      
+                let a = this.store.select(s => s.todoCompleted.todoCompletedList);
+                return a;
+        */
         return this.store.let(TodoCompletedSelector.getTodoCompletedList());
     }
 
@@ -43,5 +43,5 @@ export class TodoCompletedService {
     save(item: TodoCompleted) {
         this.store.dispatch(
             this.actions.save(item));
-    }  
+    }
 }
