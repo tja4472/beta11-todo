@@ -1,12 +1,15 @@
 import { LoginActions } from './login.action';
 import { ToDoActions } from './todo.action';
+import { TodoCompletedActions } from './todo-completed.action';
 
 export {
 LoginActions,
-ToDoActions
+ToDoActions,
+TodoCompletedActions
 };
 
 export default [
   LoginActions,
-  ToDoActions
+  ToDoActions,
+  TodoCompletedActions
 ];

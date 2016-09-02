@@ -3,17 +3,23 @@
     <button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home Page</ion-title>
+    <ion-title>View Completed</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding class="page1">
+  <todo-completed-list
+    [data]="data$ | async" 
+  ></todo-completed-list>
+
+<!--
+{{data$ | async | json }}    
   <todo-list 
       [todos]="todos$ | async" 
       (addItem)="addItem($event)"
       (toggleCompleteItem)="toggleCompleteItem($event)"      
       (editItem)="editItem($event)"
       (reorderItems)="reorderItems($event)"
-      (removeItem)="removeItem($event)"      
   ></todo-list>
+-->
 </ion-content>

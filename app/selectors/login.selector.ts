@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 // import { compose } from '@ngrx/core/compose';
 
-import { AppState, LoginState } from '../reducers';
+import { AppState } from '../reducers';
 
 export function getLoginState() {
   return (state$: Observable<AppState>) => state$

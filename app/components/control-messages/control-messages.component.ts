@@ -19,7 +19,7 @@ export class ControlMessages {
         return ValidationService.getValidatorErrorMessage(propertyName, this.control.errors[propertyName]);
       }
     }
-    
+
     return null;
   }
 }

@@ -7,6 +7,7 @@ import { LoginPage } from './pages/login/login.page';
 import { SignupPage } from './pages/signup/signup.page';
 import { Page1 } from './pages/page1/page1';
 import { Page2 } from './pages/page2/page2';
+import { ViewCompletedPage } from './pages/view-completed/view-completed.page';
 
 import { provideStore }from '@ngrx/store';
 import { runEffects } from '@ngrx/effects';
@@ -18,7 +19,10 @@ import effects from './effects';
 import reducers from './reducers';
 // import { LoginSelector } from './selectors';
 
+import { Fb1DataService } from './services/fb1.data.service';
 import { LoginService } from './services/login.service';
+import { TodoCompletedDataService } from './services/todo-completed.data.service';
+import { TodoCompletedService } from './services/todo-completed.service';
 import { TodoDataService } from './services/todo.data.service';
 import { TodoService } from './services/todo.service';
 
@@ -53,6 +57,7 @@ class MyApp {
       { title: 'Page uno', component: Page1 },
       { title: 'Page dos', component: Page2 },
       { title: 'Home page', component: HomePage },
+      { title: 'View completed page', component: ViewCompletedPage },
       { title: 'Login page', component: LoginPage },
       { title: 'Signup page', component: SignupPage }
     ];
@@ -76,7 +81,10 @@ class MyApp {
 }
 
 ionicBootstrap(MyApp, [
+  Fb1DataService,
   LoginService,
+  TodoCompletedDataService,
+  TodoCompletedService,
   TodoDataService,
   TodoService,
   /**

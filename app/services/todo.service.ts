@@ -18,6 +18,12 @@ export class TodoService {
     ) {
     }
 
+    clearCompletedItems() {
+        this.store.dispatch(
+            this.todoActions.clearCompleted()
+        );
+    }
+
     getData(): Observable<ToDo[]> {
         return this.store.let(TodoSelector.getToDos());
     }
@@ -38,6 +44,11 @@ export class TodoService {
     reorderItems(indexes: Indexes) {
         this.store.dispatch(
             this.todoActions.reorderList(indexes));
+    }
+
+    remove(todo: ToDo) {
+        this.store.dispatch(
+            this.todoActions.remove(todo.$key));
     }
 
     save(todo: ToDo) {

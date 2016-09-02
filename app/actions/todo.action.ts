@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 
-import { Indexes } from '../models/indexes'
+import { Indexes } from '../models/indexes';
 import { ToDo } from '../models/todo';
 
 @Injectable()
 export class ToDoActions {
+  static CLEAR_COMPLETED = '[ToDoActions] Clear Completed';
+  clearCompleted(): Action {
+    return {
+      type: ToDoActions.CLEAR_COMPLETED
+    };
+  }
+
   static LOAD = '[ToDoActions] Load';
   load(): Action {
     return {
@@ -28,6 +35,14 @@ export class ToDoActions {
       payload: {
         indexes: indexes
       }
+    };
+  }
+
+  static REMOVE = '[ToDoActions] Remove';
+  remove(itemKey: string): Action {
+    return {
+      type: ToDoActions.REMOVE,
+      payload: itemKey
     };
   }
 

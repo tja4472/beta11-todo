@@ -2,16 +2,27 @@ import { Injectable } from '@angular/core';
 import { Effect, StateUpdates } from '@ngrx/effects';
 import { AppState } from '../reducers';
 import { ToDoActions } from '../actions';
+import { Fb1DataService } from '../services/fb1.data.service';
 import { TodoDataService } from '../services/todo.data.service';
 import { ToDo } from '../models/todo';
 
 @Injectable()
 export class ToDoEffects {
   constructor(
+    private fb1DataService: Fb1DataService,
     private updates$: StateUpdates<AppState>,
     private todoActions: ToDoActions,
     private todoDataService: TodoDataService
   ) { }
+
+  @Effect() clearCompleted$ = this.updates$
+    .whenAction(ToDoActions.CLEAR_COMPLETED)
+    .do(x => {
+      let completed = x.state.todo.todos.filter(a => a.isComplete);
+      this.fb1DataService.clearCompletedTodos(completed);
+    })
+    // Terminate effect.
+    .ignoreElements();
 
   @Effect() loadCollection$ = this.updates$
     .whenAction(ToDoActions.LOAD)
@@ -33,8 +44,19 @@ export class ToDoEffects {
         x.state.todo.todos);
     })
 
-  // Terminate effect.
-  .ignoreElements();      
+    // Terminate effect.
+    .ignoreElements();
+
+  @Effect() removeItem$ = this.updates$
+    .whenAction(ToDoActions.REMOVE)
+    .do(x => {
+      console.log('Effect:removeItem$:A', x);
+      this.todoDataService.removeItem(
+        x.action.payload);
+    })
+
+    // Terminate effect.
+    .ignoreElements();
 
   @Effect() save$ = this.updates$
     .whenAction(ToDoActions.SAVE)
@@ -44,6 +66,6 @@ export class ToDoEffects {
         x.action.payload);
     })
 
-  // Terminate effect.
-  .ignoreElements();   
+    // Terminate effect.
+    .ignoreElements();
 }
