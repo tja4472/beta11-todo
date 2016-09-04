@@ -12,7 +12,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="page1">
+<ion-content>
   <todo-list 
       [todos]="todos$ | async" 
       (addItem)="addItem($event)"
