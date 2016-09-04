@@ -40,6 +40,11 @@ export class TodoCompletedService {
         return this.store.let(TodoCompletedSelector.getLoading());
     }
 
+    moveToCurrent(item: TodoCompleted) {
+        this.store.dispatch(
+            this.actions.moveToCurrent(item));
+    }
+
     remove(todo: TodoCompleted) {
         this.store.dispatch(
             this.actions.remove(todo.$key));

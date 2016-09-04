@@ -13,8 +13,8 @@ import { TodoCompletedDataService } from '../services/todo-completed.data.servic
 export class Fb1DataService {
     constructor(
         public af: AngularFire,
-            private todoCompletedDataService: TodoCompletedDataService,
-            private todoDataService: TodoDataService
+        private todoCompletedDataService: TodoCompletedDataService,
+        private todoDataService: TodoDataService
     ) { }
 
     clearCompletedTodos(items: ToDo[]) {
@@ -32,5 +32,19 @@ export class Fb1DataService {
             this.todoCompletedDataService.save(todoCompleted);
             this.todoDataService.removeItem(x.$key);
         });
+    }
+
+    moveToCuurent(item: TodoCompleted) {
+        console.log('moveToCuurent>', item);
+        let todo: ToDo = {
+            $key: item.$key,
+            description: item.description,
+            name: item.name,
+            isComplete: item.isComplete,
+            index: 0
+        };
+
+        this.todoDataService.save(todo);
+        this.todoCompletedDataService.removeItem(item.$key);
     }
 }

@@ -39,10 +39,14 @@ export class ViewCompletedPage {
     let modal = this.modalCtrl.create(TodoCompletedPage, { todo: item });
 
     modal.onDidDismiss((data: TodoCompleted) => {
-      console.log('onDidDismiss>', data);
+      console.log('editItem:onDidDismiss>', data);
 
       if (!!data) {
-        this.todoCompletedService.save(data);
+        if (data.isComplete) {
+          this.todoCompletedService.save(data);
+        } else {
+           this.todoCompletedService.moveToCurrent(data);
+        }
       }
     });
 

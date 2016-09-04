@@ -20,6 +20,14 @@ export class TodoCompletedActions {
     };
   }
 
+  static MOVE_TO_CURRENT = '[TodoCompletedActions] Move To Current';
+  moveToCurrent(item: TodoCompleted): Action {
+    return {
+      type: TodoCompletedActions.MOVE_TO_CURRENT,
+      payload: item
+    };
+  }
+
   static REMOVE = '[TodoCompletedActions] Remove';
   remove(itemKey: string): Action {
     return {
