@@ -7,6 +7,7 @@ import { TodoCompletedService } from '../../services/todo-completed.service';
 import {
   DataInput,
   EditItemOutput,
+  RemoveItemOutput,
   TodoCompletedListComponent
 } from '../../components/todo-completed-list/todo-completed-list.component';
 
@@ -46,5 +47,10 @@ export class ViewCompletedPage {
     });
 
     modal.present();
+  }
+
+  removeItem(item: RemoveItemOutput) {
+    console.log('removeItem:item>', item);
+    this.todoCompletedService.remove(item);
   }
 }

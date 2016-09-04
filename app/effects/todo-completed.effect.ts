@@ -24,6 +24,17 @@ export class TodoCompletedEffects {
   // Terminate effect.
   // .ignoreElements());      
 
+  @Effect() removeItem$ = this.updates$
+    .whenAction(TodoCompletedActions.REMOVE)
+    .do(x => {
+      console.log('Effect:removeItem$:A', x);
+      this.dataService.removeItem(
+        x.action.payload);
+    })
+
+    // Terminate effect.
+    .ignoreElements();
+
   @Effect() save$ = this.updates$
     .whenAction(TodoCompletedActions.SAVE)
     .do(x => {
@@ -32,6 +43,6 @@ export class TodoCompletedEffects {
         x.action.payload);
     })
 
-  // Terminate effect.
-  .ignoreElements();
+    // Terminate effect.
+    .ignoreElements();
 }

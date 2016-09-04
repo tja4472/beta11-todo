@@ -9,9 +9,10 @@
 
 <ion-content padding class="page1">
   <todo-completed-list 
-    [data]="data$ | async" 
-    (editItem)="editItem($event)">
-  </todo-completed-list>
+      [data]="data$ | async" 
+      (editItem)="editItem($event)"
+      (removeItem)="removeItem($event)"        
+  ></todo-completed-list>
 
   <!--
 {{data$ | async | json }}    

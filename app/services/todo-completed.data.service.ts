@@ -21,6 +21,10 @@ export class TodoCompletedDataService {
             .map(x => x.map(d => fromFirebaseRecord(d)));
     }
 
+    removeItem(itemKey: string) {
+        this.fb_CompletedTodos.remove(itemKey);
+    }
+
     save(item: TodoCompleted) {
         console.log('save>', item);
 
@@ -37,7 +41,7 @@ export class TodoCompletedDataService {
 interface FirebaseRecord {
     description?: string;
     name: string;
-        isComplete: boolean;
+    isComplete: boolean;
 }
 
 function toFirebaseRecord(item: TodoCompleted): FirebaseRecord {

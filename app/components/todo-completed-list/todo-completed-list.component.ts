@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { TodoCompleted } from '../../models/todo-completed';
 
-/*
-export type ToggleCompleteItemOutput = ToDo;
-*/
 export type EditItemOutput = TodoCompleted;
+export type RemoveItemOutput = TodoCompleted;
 
 export type DataInput = TodoCompleted[];
 
@@ -15,25 +13,10 @@ export type DataInput = TodoCompleted[];
 })
 export class TodoCompletedListComponent {
   @Input() public data: DataInput;
-  /*  
-    @Output() public addItem = new EventEmitter();
-    @Output() public toggleCompleteItem = new EventEmitter<ToggleCompleteItemOutput>();
-  */
+
   @Output() public editItem = new EventEmitter<EditItemOutput>();
+  @Output() public removeItem = new EventEmitter<RemoveItemOutput>();
 
   constructor() {
   }
-  /*
-  removeItem(item) {
-     console.log('removeItem>', item);
-  }
-  
-    aaaaa() {
-      console.log('aaaaa');
-    }
-  
-    bb() {
-      console.log('bb');
-    }
-  */
 }

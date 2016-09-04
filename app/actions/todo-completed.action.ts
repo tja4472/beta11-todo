@@ -20,6 +20,14 @@ export class TodoCompletedActions {
     };
   }
 
+  static REMOVE = '[TodoCompletedActions] Remove';
+  remove(itemKey: string): Action {
+    return {
+      type: TodoCompletedActions.REMOVE,
+      payload: itemKey
+    };
+  }
+
   static SAVE = '[TodoCompletedActions] Save';
   save(item: TodoCompleted): Action {
     return {
