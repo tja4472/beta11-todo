@@ -25,7 +25,8 @@ export class Fb1DataService {
             let todoCompleted: TodoCompleted = {
                 $key: '',
                 description: x.description,
-                name: x.name
+                name: x.name,
+                isComplete: x.isComplete
             };
 
             this.todoCompletedDataService.save(todoCompleted);

@@ -7,17 +7,20 @@ import { ToDo } from '../models/todo';
 
 import { reorderArray } from 'ionic-angular';
 
-const FIREBASE_KEY = '/todo';
+const FIREBASE_CURRENT_TODOS = '/todo/currentTodos';
 
 @Injectable()
 export class TodoDataService {
+    private fb_CurrentTodos: any; // readonly
+
     constructor(
         public af: AngularFire
     ) {
+        this.fb_CurrentTodos = af.database.list(FIREBASE_CURRENT_TODOS);
     }
 
     getData(): Observable<ToDo[]> {
-        return this.af.database.list(FIREBASE_KEY, {
+        return this.af.database.list(FIREBASE_CURRENT_TODOS, {
             query: {
                 orderByChild: 'index'
             }
@@ -29,28 +32,24 @@ export class TodoDataService {
         const itemsToSave = [...todos];
         reorderArray(itemsToSave, indexes);
 
-        const items = this.af.database.list(FIREBASE_KEY);
-
         for (let x = 0; x < itemsToSave.length; x++) {
-            items.update(itemsToSave[x].$key, { index: x });
+            this.fb_CurrentTodos.update(itemsToSave[x].$key, { index: x });
         }
     }
 
     removeItem(itemKey: string) {
-        const items = this.af.database.list(FIREBASE_KEY);
-        items.remove(itemKey);
+        this.fb_CurrentTodos.remove(itemKey);
     }
 
     save(todo: ToDo) {
         console.log('save>', todo);
-        const items = this.af.database.list(FIREBASE_KEY);
 
         if (todo.$key === '') {
             // insert.
-            items.push(toFirebaseTodo(todo));
+            this.fb_CurrentTodos.push(toFirebaseTodo(todo));
         } else {
             // update.
-            items.update(todo.$key, toFirebaseTodo(todo));
+            this.fb_CurrentTodos.update(todo.$key, toFirebaseTodo(todo));
         }
     }
 }
