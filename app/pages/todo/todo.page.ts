@@ -14,6 +14,7 @@ import { ControlMessages } from '../../components/control-messages/control-messa
 })
 export class TodoPage {
   public todoForm: FormGroup;
+
   private todo: ToDo =
   {
     $key: '',
@@ -62,10 +63,18 @@ export class TodoPage {
     }
 
     console.log(this.todoForm.value);
+    console.log('this.todo>', this.todo);
 
-    this.todo.name = this.todoForm.value.name;
-    this.todo.description = this.todoForm.value.description;
-    this.todo.isComplete = this.todoForm.value.isComplete;
-    this.viewController.dismiss(this.todo);
+    // Get error here with private todo when using popover.
+    // Hence local.
+    let localTodo: ToDo = {
+        $key: this.todo.$key,
+        description: this.todoForm.value.description,
+        name: this.todoForm.value.name,
+        index: this.todo.index,
+        isComplete: this.todoForm.value.isComplete
+      };
+
+    this.viewController.dismiss(localTodo);
   }
 }

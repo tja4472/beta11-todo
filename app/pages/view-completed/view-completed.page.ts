@@ -5,7 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { TodoCompletedService } from '../../services/todo-completed.service';
 
 import {
-  dataInput,
+  DataInput,
+  EditItemOutput,
   TodoCompletedListComponent
 } from '../../components/todo-completed-list/todo-completed-list.component';
 
@@ -14,7 +15,7 @@ import {
   templateUrl: 'build/pages/view-completed/view-completed.page.html'
 })
 export class ViewCompletedPage {
-  data$: Observable<dataInput>;
+  data$: Observable<DataInput>;
 
   constructor(
     public navCtrl: NavController,
@@ -26,5 +27,9 @@ export class ViewCompletedPage {
 
   ionViewLoaded() {
     this.todoCompletedService.initialise();
+  }
+
+  editItem(item: EditItemOutput) {
+    console.log('editItem:item>', item);
   }
 }
