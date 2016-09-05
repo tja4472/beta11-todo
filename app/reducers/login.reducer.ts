@@ -64,6 +64,7 @@ export default function (state = initialState, action: Action): LoginState {
         }
 
         case LoginActions.ANONYMOUS_AUTHENTICATION:
+        case LoginActions.BEGIN_AUTHENTICATION:
         case LoginActions.CREATE_USER:
         case LoginActions.EMAIL_AUTHENTICATION: {
             return assign(state, {
@@ -72,11 +73,13 @@ export default function (state = initialState, action: Action): LoginState {
             });
         }
 
+        case LoginActions.BEGIN_AUTHENTICATION_FAILURE:
         case LoginActions.ANONYMOUS_AUTHENTICATION_FAILURE:
         case LoginActions.CREATE_USER_FAILURE:
         case LoginActions.EMAIL_AUTHENTICATION_FAILURE: {
             return assign(state, {
                 error: action.payload,
+                isAuthenticated: false,
                 isAuthenticating: false
             });
         }

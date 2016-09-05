@@ -27,6 +27,7 @@ export class ToDoEffects {
   @Effect() loadCollection$ = this.updates$
     .whenAction(ToDoActions.LOAD)
     .do(x => { console.log('Effect:loadCollection$:A', x); })
+    .filter(x => x.state.login.isAuthenticated)
 
     // Watch database node and get items.
     .switchMap(x => this.todoDataService.getData())

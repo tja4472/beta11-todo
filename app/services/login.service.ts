@@ -15,6 +15,8 @@ export class LoginService {
     ) { }
 
     initialise(): void {
+        this.store.dispatch(this.loginActions.beginAuthentication());
+
         // Subscribe to the auth object to check for the login status
         // of the user.      
         this.af.auth.take(1).subscribe((authState: FirebaseAuthState) => {
@@ -28,6 +30,8 @@ export class LoginService {
 
             if (authenticated) {
                 this.store.dispatch(this.loginActions.restoreAuthentication(authState));
+            } else {
+                this.store.dispatch(this.loginActions.beginAuthenticationFailure());
             }
         });
     }
@@ -64,5 +68,11 @@ export class LoginService {
     googleAuthentication() {
         this.store.dispatch(
             this.loginActions.googleAuthentication());
+    }
+
+    logout() {
+        this.store.dispatch(
+            this.loginActions.logout());
+        this.af.auth.logout();
     }
 }

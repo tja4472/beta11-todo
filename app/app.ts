@@ -6,7 +6,7 @@ import { HomePage } from './pages/home/home.page';
 import { LoginPage } from './pages/login/login.page';
 import { SignupPage } from './pages/signup/signup.page';
 import { Page1 } from './pages/page1/page1';
-import { Page2 } from './pages/page2/page2';
+// import { Page2 } from './pages/page2/page2';
 import { ViewCompletedPage } from './pages/view-completed/view-completed.page';
 
 import { provideStore }from '@ngrx/store';
@@ -43,8 +43,9 @@ class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = Page1;
-
+  loginState$: any;
   pages: Array<{ title: string, component: any }>;
+  private subscription;
 
   constructor(
     private loginService: LoginService,
@@ -54,15 +55,31 @@ class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Page uno', component: Page1 },
-      { title: 'Page dos', component: Page2 },
-      { title: 'Home page', component: HomePage },
-      { title: 'View completed page', component: ViewCompletedPage },
-      { title: 'Login page', component: LoginPage },
-      { title: 'Signup page', component: SignupPage }
+      { title: 'Current todos', component: HomePage },
+      { title: 'Completed todos', component: ViewCompletedPage },
+      { title: 'Login', component: LoginPage },
+      { title: 'Signup', component: SignupPage },
+      { title: 'Logout', component: LoginPage }
     ];
 
     loginService.initialise();
+
+    this.loginState$ = loginService.getLoginState();
+
+    this.subscription = loginService.getLoginState()
+      .subscribe(loginState => {
+        console.log('loginState>', loginState);
+        console.log('loginState.isAuthenticated>', loginState.isAuthenticated);
+        console.log('loginState.isAuthenticating>', loginState.isAuthenticating);
+
+        if (loginState.isAuthenticating) {
+          // this.rootPage = Page1;
+        } else if (loginState.isAuthenticated) {
+          this.rootPage = HomePage;
+        } else {
+          this.rootPage = LoginPage;
+        }
+      });
   }
 
   initializeApp() {
@@ -77,6 +94,13 @@ class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+
+    if (page.title === 'Logout') {
+      // Give the menu time to close before changing to logged out
+      setTimeout(() => {
+        this.loginService.logout();
+      }, 1000);
+    }
   }
 }
 

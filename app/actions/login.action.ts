@@ -35,6 +35,22 @@ export class LoginActions {
         };
     }
 
+    static BEGIN_AUTHENTICATION = '[Login] Begin Authentication';
+    beginAuthentication(): Action {
+        return {
+            type: LoginActions.BEGIN_AUTHENTICATION
+            // payload
+        };
+    }
+
+    static BEGIN_AUTHENTICATION_FAILURE = '[Login] Begin Authentication Failure';
+    beginAuthenticationFailure(): Action {
+        return {
+            type: LoginActions.BEGIN_AUTHENTICATION_FAILURE
+            // payload
+        };
+    }
+
     static CREATE_USER = '[Login] Create User';
     createUser(userName: string, password: string): Action {
         return {
