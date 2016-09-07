@@ -6,6 +6,7 @@ import { NavParams, ViewController } from 'ionic-angular';
 import { ToDo } from '../../models/todo';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ControlMessages } from '../../components/control-messages/control-messages.component';
+import { assign } from '../../utils';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -67,6 +68,15 @@ export class TodoPage {
 
     // Get error here with private todo when using popover.
     // Hence local.
+
+    let localTodo = assign(this.todo, {
+      name: this.todoForm.value.name,
+      isComplete: this.todoForm.value.isComplete
+    });
+
+    // assign did not like optional property.
+    localTodo.description = this.todoForm.value.description;
+    /*
     let localTodo: ToDo = {
         $key: this.todo.$key,
         description: this.todoForm.value.description,
@@ -74,7 +84,7 @@ export class TodoPage {
         index: this.todo.index,
         isComplete: this.todoForm.value.isComplete
       };
-
+*/
     this.viewController.dismiss(localTodo);
   }
 }
